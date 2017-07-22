@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+	Afonso
+	Diogo 
+-->
+<html lang="pt">
+
+<head>
+    <title>Viagens</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="stylesheet" href="../public/assets/css/main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <section id="header">
+        <header class="major">
+            <h1>AS<br/>MINHAS<br/>VIAGENS</h1>
+            <p>API - SPA</a>
+            </p>
+        </header>
+        <div class="container">
+            <div class="page-header text-center">
+                <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            </div>
+
+            <div class="row">
+                <!-- FACEBOOK INFORMATION -->
+                <div class="col-sm-6">
+                    <div class="well">
+                        <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+                        <p>
+                            <strong>id</strong>:
+                            <%= user.google.id %><br>
+                                <strong>token</strong>:
+                                <%= user.google.token %><br>
+                                    <strong>email</strong>:
+                                    <%= user.google.email %><br>
+                                        <strong>name</strong>:
+                                        <%= user.google.name %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts -->
+   	<script src="../public/assets/js/jquery.min.js"></script>
+	<script src="../public/assets/js/jquery.scrollex.min.js"></script>
+	<script src="../public/assets/js/jquery.scrolly.min.js"></script>
+	<script src="../public/assets/js/skel.min.js"></script>
+	<script src="../public/assets/js/util.js"></script>
+	<script src="../public/assets/js/main.js"></script>
+</body>
+
+</html>

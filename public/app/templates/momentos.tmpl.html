@@ -1,0 +1,71 @@
+<!-- List an deleting -->
+<div class="col-sm-4">
+    <div class="portal col">
+        <div class="item" ng-repeat="item in momentos.items" ng-click="momentos.setEditedItem(item)" ng-class="{'active':momentos.isCurrentItem(item.id)}">
+            <button type="button" class="close" ng-click="momentos.deleteItem()">&times;</button>
+            <h4>{{item.Localidade}}</h4>
+            <p><strong>{{item.Tempo}}</strong>:{{item.Descricao}}
+                <p>Duracao:{{item.Chegada }} | {{item.Partida}} </p>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="col-sm-8">
+    <!-- CREATING -->
+    <div ng-if="!momentos.isEditing" class="col-xs-12">
+        <h4>Criar Novo momento</h4>
+        <form class="create-form" role="form" ng-submit="momentos.createItem(momentos.newItem)" novalidate>
+            <div class="form-group">
+                <label>Localidade</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Localidade" placeholder="Nome da localidade">
+            </div>
+            <div class="form-group">
+                <label>Tempo</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Tempo" placeholder="descreva">
+            </div>
+            <div class="form-group">
+                <label>Longitude</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Longitude" placeholder="numero">
+            </div>
+            <div class="form-group">
+                <label>Latitude</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Latitude" placeholder="numero">
+            </div>
+            <div class="form-group">
+                <label>Descricao</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Descricao" placeholder="descreva">
+            </div>
+            <div class="form-group">
+                <label>Media</label>
+                <input type="file" file-model="myFile" ng-model="momentos.newItem.Media" /><br>
+                <button ng-click="uploadFile()">Upload</button>
+            </div>
+            <div class="form-group">
+                <label>Visivel</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Visivel" placeholder="true or false">
+            </div>
+            <div class="form-group">
+                <label>Data</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.Data" placeholder="16-07-2017">
+            </div>
+            <div class="form-group">
+                <label>idViagem</label>
+                <input type="text" class="form-control" ng-model="momentos.newItem.idViagem" placeholder="5970d965f36d2812888ac867">
+            </div>
+            <button type="submit" class="btn btn-info btn-lg">Criar</button>
+        </form>
+    </div>
+    <!-- EDITING -->
+    <div ng-if="momentos.isEditing" class="col-xs-12">
+        <h4>Editing {{momentos.editedItem.Descricao}}</h4>
+        <form class="edit-form" role="form" ng-submit="momentos.updateItem(momentos.editedItem)" novalidate>
+            <div class="form-group">
+                <label>Descricao</label>
+                <input type="text" class="form-control" ng-model="momentos.editedItem.Descricao" placeholder="Nova descrição">
+            </div>
+            <button type="submit" class="btn btn-info btn-lg">Salvar</button>
+            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="momentos.cancelEditing()">Cancelar
+            </button>
+        </form>
+    </div>
+</div>

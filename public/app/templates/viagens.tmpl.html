@@ -1,0 +1,77 @@
+<!-- List an deleting -->
+<div class="col-sm-4">
+    <div class="portal col">
+        <div class="item" ng-repeat="item in viagens.items"
+             ng-click="viagens.setEditedItem(item)"
+             ng-class="{'active':viagens.isCurrentItem(item.id)}">
+            <button type="button" class="close" ng-click="viagens.deleteItem(item.id)">&times;</button>
+            <h4>{{item.Pais}}</h4>
+            <p><strong>{{item.Cidade}}</strong>:{{item.Descricao}} <p>Duracao:{{item.Chegada }} | {{item.Partida}} </p> </p>
+        </div>
+    </div>
+</div>
+<div class="col-sm-8">
+    <!-- CREATING -->
+    <div ng-if="!viagens.isEditing" class="col-xs-12">
+        <h4>Criar Nova viagem</h4>
+        <form class="create-form" role="form"
+              ng-submit="viagens.createItem(viagens.newItem)" novalidate>
+            <div class="form-group">
+                <label>Pais</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Pais" placeholder="Nome do pais">
+            </div>
+            <div class="form-group">
+                <label>Cidade</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Cidade" placeholder="Nome da cidade">
+            </div>
+            <div class="form-group">
+                <label>Latitude</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Latitude" placeholder="Latitude">
+            </div>
+            <div class="form-group">
+                <label>Longitude</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Longitude" placeholder="Longitude">
+            </div>
+            <div class="form-group">
+                <label>Descricao</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Desricao" placeholder="Descreva a viagem">
+            </div>
+            <div class="form-group">
+                <label>Visivel</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Visivel" placeholder="True or false">
+            </div>
+            <div class="form-group">
+                <label>Chegada</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Chegada" placeholder="16-07-2017">
+            </div>
+            <div class="form-group">
+                <label>Partida</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.Partida" placeholder="16-07-2017 ">
+            </div>
+              <div class="form-group">
+                <label>idUtilizador</label>
+                <input type="text" class="form-control" ng-model="viagens.newItem.idUtilizador" placeholder="5969dc22f36d281eb440246d">
+            </div>
+                    
+            <button type="submit" class="btn btn-info btn-lg">Criar</button>
+        </form>
+    </div>
+    <!-- EDITING -->
+    <div ng-if="viagens.isEditing" class="col-xs-12">
+        <h4>Editing {{viagens.editedItem.Descricao}}</h4>
+        <form class="edit-form" role="form"
+              ng-submit="viagens.updateItem(viagens.editedItem)" novalidate>
+            <div class="form-group">
+            <div class="form-group">
+                <label>Descricao</label>
+                <input type="text" class="form-control"
+                       ng-model="viagens.editedItem.Descricao"
+                       placeholder="Nova descrição">
+            </div>
+            <button type="submit" class="btn btn-info btn-lg">Salvar</button>
+            <button type="button" class="btn btn-default btn-lg pull-right"
+                    ng-click="viagens.cancelEditing()">Cancelar
+            </button>
+        </form>
+    </div>
+</div>

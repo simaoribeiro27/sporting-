@@ -1,0 +1,371 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Viagens"
+host: "olamundos.herokuapp.com"
+basePath: ""
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /viagens:
+    get:
+      description: "Returns all travels from the system that the user has access to"
+      operation_id: "findtravels"
+      produces:
+      - "application/json"
+      - "application/xml"
+      - "text/xml"
+      - "text/html"
+      - name: "Pais"
+        in: "query"
+        description: "maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "travel response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/travel"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+    post:
+      description: "Creates a new travel in the store.  Duplicates are allowed"
+      operation_id: "addtravel"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Pais"
+        description: "travel to add to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/newtravel"
+      responses:
+        200:
+          description: "travel response"
+          schema:
+            $ref: "#/definitions/travel"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+  /viagens/{_id}:
+    get:
+      description: "Returns a user based on a single _id, if the user does not have\
+        \ access to the travel"
+      operation_id: "findtravelBy_id"
+      produces:
+      - "application/json"
+      - "application/xml"
+      - "text/xml"
+      - "text/html"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "_id of travel to fetch"
+        required: true
+        type: "object"
+      responses:
+        200:
+          description: "travel response"
+          schema:
+            $ref: "#/definitions/travel"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      description: "deletes a single travel based on the _id supplied"
+      operation_id: "deletetravel"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "_id of travel to delete"
+        required: true
+        type: "object"
+      responses:
+        204:
+          description: "travel deleted"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+  /momentos:
+    get:
+      description: "Returns all moments from the system that the user has access to"
+      operation_id: "findmomentstravels"
+      produces:
+      - "application/json"
+      - "application/xml"
+      - "text/xml"
+      - "text/html"
+      - name: "Localidade"
+        in: "query"
+        description: "maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "moment response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/moment"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+    post:
+      description: "Creates a new moment in the store.  Duplicates are allowed"
+      operation_id: "addmoment"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Localidade"
+        description: "moment to add to the store"
+        required: true 
+      - in: "formData"
+        name: "Media"
+        description: "media to add to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/newmoment"
+      responses:
+        200:
+          description: "moment response"
+          schema:
+            $ref: "#/definitions/moment"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+  /momentos/{_id}:
+    get:
+      description: "Returns a user based on a single _id, if the user does not have\
+        \ access to the moment"
+      operation_id: "findmomentBy_id"
+      produces:
+      - "application/json"
+      - "application/xml"
+      - "text/xml"
+      - "text/html"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "_id of moment to fetch"
+        required: true
+        type: "object"
+      responses:
+        200:
+          description: "moment response"
+          schema:
+            $ref: "#/definitions/moment"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      description: "deletes a single moment based on the _id supplied"
+      operation_id: "deletemoment"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: "_id of moment to delete"
+        required: true
+        type: "object"
+      responses:
+        204:
+          description: "moment deleted"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+  /classificacoes:
+    get:
+      description: "Returns all  from the system that the user has access to"
+      operation_id: "findclassifications"
+      produces:
+      - "application/json"
+      - "application/xml"
+      - "text/xml"
+      - "text/html"
+      - name: "Classi"
+        in: "query"
+        description: "maximum number of results to return"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/classifications"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+    post:
+      description: "Creates a new classification in the moment store.  Duplicates are allowed"
+      operation_id: "addclassication"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Classi"
+        description: "classification to add to the moment"
+        required: true
+        schema:
+          $ref: "#/definitions/classifications"
+      responses:
+        200:
+          description: "response"
+          schema:
+            $ref: "#/definitions/classifications"
+        default:
+          schema:
+            $ref: "#/definitions/errorModel"
+definitions:
+  travel:
+    type: "object"
+    required:
+    - "_id"
+    - "Pais"
+    properties:
+      Pais:
+        type: "string"
+      Cidade:
+        type: "string"
+      Descricao:
+        type: "string"
+      Latitude:
+        type: "string"
+      Longitude:
+        type: "string"
+        format: "point"
+      Visivel:
+        type: "string"
+        format: "Boolean"
+      Chegada:
+        type: "string"
+        format: "date"
+      Partida:
+        type: "string"
+        format: "date"
+      idUtilizador:
+        type: "string"
+  newtravel:
+    type: "object"
+    required:
+    - "Pais"
+    properties:
+      Pais:
+        type: "string"
+      Cidade:
+        type: "string"
+      Descricao:
+        type: "string"
+      Latitude:
+        type: "string"
+      Longitude:
+        type: "string"
+      Visivel:
+        type: "string"
+        format: "Boolean"
+      Chegada:
+        type: "string"
+        format: "date"
+      Partida:
+        type: "string"
+        format: "date"
+      idUtilizador:
+        type: "string"
+  moment:
+    type: "object"
+    required:
+    - "_id"
+    - "Localidade"
+    - "idViagem"
+    properties:
+      Localidade:
+        type: "string"
+      Tempo:
+        type: "string"
+      Descricao:
+        type: "string"
+      Latitude:
+        type: "string"
+      Longitude:
+        type: "string"
+      Visivel:
+        type: "string"
+        format: "Boolean"
+      ImagenUrl:
+        type: "string"
+      Data:
+        type: "string"
+      Media:
+        type: "file"
+        format: "file"
+      idViagem:
+        type: "string"
+  newmoment:
+    type: "object"
+    required:
+    - "_id"
+    - "Localidade"
+    - "idViagem"
+    properties:
+      Localidade:
+        type: "string"
+      Tempo:
+        type: "string"
+      Descricao:
+        type: "string"
+      Latitude:
+        type: "string"
+      Longitude:
+        type: "string"
+      Visivel:
+        type: "string"
+        format: "Boolean"
+      ImagenUrl:
+        type: "string"
+      Data:
+        type: "string"
+      Media:
+        type: "file"
+        format: "file"
+      idViagem:
+        type: "string"
+  classifications:
+    type: "object"
+    required:
+    - "_id"
+    - "Classi"
+    - "idViagem"
+    - "idUtilizador"
+    properties:
+      Classi:
+        type: "integer"
+      idUtilizador:
+        type: "string"
+      idViagem:
+        type: "string"
+      idMomento:
+        type: "string"
+  errorModel:
+    type: "object"
+    required:
+    - "code"
+    - "message"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"

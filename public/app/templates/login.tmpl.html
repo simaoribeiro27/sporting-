@@ -1,0 +1,25 @@
+<div class="col-sm-4 col-sm-offset-4">
+    <div class="portal col-xs-12">
+        <h4 class="col-xs-12">Login</h4>
+        <form class="col-xs-12" ng-submit="login.submit(login.user)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" class="form-control" type="text" ng-model="login.user.Nome" placeholder="Enter name" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" class="form-control" type="email" ng-model="login.user.Email" placeholder="Enter email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" name="password" class="form-control" type="password" ng-model="login.user.Password" placeholder="Enter password"
+                />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-info btn-lg">Submit</button>
+                <input id="new_user" name="new_user" type="checkbox" ng-model="login.newUser" />
+                <label for="new_user">New user</label>
+            </div>
+        </form>
+    </div>
+</div>
